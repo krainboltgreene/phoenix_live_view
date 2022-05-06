@@ -137,6 +137,22 @@ if Version.match?(System.version(), ">= 1.13.0") do
         """,
         line_length: 40
       )
+
+      assert_formatter_output(
+        """
+        <p>first <span>name</span> second</p>
+        """,
+        """
+        <p>
+          first
+          <span>
+            name
+          </span>
+          second
+        </p>
+        """,
+        line_length: 10
+      )
     end
 
     test "remove unwanted empty lines" do
@@ -465,8 +481,7 @@ if Version.match?(System.version(), ">= 1.13.0") do
         """,
         """
         <p>
-          <span>this is a long long long long long looooooong text</span> <%= @product.value %>
-          and more stuff over here
+          <span>this is a long long long long long looooooong text</span> <%= @product.value %> and more stuff over here
         </p>
         """
       )
